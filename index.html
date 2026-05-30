@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en" suppressHydrationWarning>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#121212" media="(prefers-color-scheme: dark)" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Level Automotives" />
+    <meta name="description" content="Kerala's premium vehicle marketplace. Buy, sell and discover cars, bikes and more." />
+    <title>Level Automotives</title>
+    <link rel="manifest" href="/manifest.json" />
+    <style>
+      :root {
+        --color-primary: #6A1B9A;
+        --color-primary-light: #AB47BC;
+        --color-bg: #FFFFFF;
+        --color-bg-paper: #F5F5F5;
+        --color-text: #212121;
+        --color-text-secondary: #616161;
+        --color-divider: #E0E0E0;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --color-primary: #AB47BC;
+          --color-primary-light: #BA68C8;
+          --color-bg: #121212;
+          --color-bg-paper: #1E1E1E;
+          --color-text: #FFFFFF;
+          --color-text-secondary: #BDBDBD;
+          --color-divider: #424242;
+        }
+      }
+
+      /* Map old colors to new theme */
+      [style*="#00E5FF"] { --old-primary: var(--color-primary); }
+      [style*="#050A14"], [style*="#0D1526"], [style*="#111D35"] { --old-bg: var(--color-bg-paper); }
+      [style*="#E8EDF5"] { --old-text: var(--color-text); }
+      [style*="#7A8BA8"] { --old-text-secondary: var(--color-text-secondary); }
+      [style*="#1E2D47"] { --old-divider: var(--color-divider); }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

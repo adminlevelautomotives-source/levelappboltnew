@@ -1,0 +1,80 @@
+@import "tailwindcss";
+
+@theme {
+  --color-dark: #050A14;
+  --color-surface: #0D1526;
+  --color-surface-2: #111D35;
+  --color-cyan: #00E5FF;
+  --color-cyan-dim: #00B8CC;
+  --color-orange: #FF6B35;
+  --color-success: #10b981;
+  --color-danger: #ef4444;
+  --color-amber: #f59e0b;
+  --color-text: #E8EDF5;
+  --color-text-muted: #7A8BA8;
+  --color-border: #1E2D47;
+  --font-sans: 'Inter', 'DM Sans', system-ui, sans-serif;
+  --radius-card: 16px;
+  --radius-lg: 20px;
+  --radius-md: 12px;
+  --radius-sm: 8px;
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: #050A14;
+  color: #E8EDF5;
+  font-family: 'Inter', 'DM Sans', system-ui, sans-serif;
+  overflow-x: hidden;
+}
+
+/* Hide scrollbar but keep scroll */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Safe area for phones */
+.pb-safe {
+  padding-bottom: max(80px, env(safe-area-inset-bottom, 80px));
+}
+
+/* PWA viewport */
+#root {
+  max-width: 430px;
+  margin: 0 auto;
+  min-height: 100svh;
+  position: relative;
+  background-color: #050A14;
+  box-shadow: 0 0 60px rgba(0,0,0,0.8);
+}
+
+/* Smooth transitions */
+.page-enter {
+  animation: fadeSlideIn 0.2s ease-out;
+}
+
+@keyframes fadeSlideIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Custom scrollbar for desktop */
+@media (min-width: 768px) {
+  body {
+    background: #020609;
+  }
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}

@@ -1,63 +1,66 @@
 import { createTheme } from '@mui/material/styles'
-import { deepPurple, grey, purple } from '@mui/material/colors'
 
 const theme = createTheme({
   cssVariables: true,
   colorSchemes: {
-    light: {
-      palette: {
-        primary: {
-          main: purple[700], // Deep purple: #6A1B9A
-          light: purple[400], // Light purple: #AB47BC
-          dark: deepPurple[900], // Very dark purple: #37145B
-          contrastText: '#FFFFFF',
-        },
-        secondary: {
-          main: grey[200], // Light grey for secondary accent
-          light: '#FFFFFF',
-          dark: grey[400],
-          contrastText: grey[900],
-        },
-        success: { main: '#10b981' },
-        error: { main: '#ef4444' },
-        warning: { main: '#f59e0b' },
-        background: {
-          default: '#FFFFFF',
-          paper: '#F5F5F5',
-        },
-        text: {
-          primary: grey[900], // Almost black: #212121
-          secondary: grey[600], // Medium grey: #616161
-        },
-        divider: grey[300],
-      },
-    },
     dark: {
       palette: {
+        mode: 'dark',
         primary: {
-          main: purple[400], // Light purple for dark mode: #AB47BC
-          light: purple[300], // Even lighter: #BA68C8
-          dark: deepPurple[800], // Dark purple: #4A148C
+          main: '#7C3AED',
+          light: '#A855F7',
+          dark: '#6D28D9',
           contrastText: '#FFFFFF',
         },
         secondary: {
-          main: grey[700], // Dark grey for secondary accent
-          light: grey[600],
-          dark: grey[900],
+          main: '#A855F7',
+          light: '#C084FC',
+          dark: '#7C3AED',
           contrastText: '#FFFFFF',
         },
-        success: { main: '#10b981' },
-        error: { main: '#ef4444' },
-        warning: { main: '#f59e0b' },
         background: {
-          default: '#121212', // Dark background
-          paper: '#1E1E1E',
+          default: '#0D0D1A',
+          paper: '#1A1A2E',
         },
         text: {
           primary: '#FFFFFF',
-          secondary: grey[400], // Light grey: #BDBDBD
+          secondary: '#D1D5DB',
         },
-        divider: grey[800],
+        divider: '#374151',
+        error: { main: '#EF4444' },
+        warning: { main: '#F59E0B' },
+        success: { main: '#10B981' },
+        info: { main: '#3B82F6' },
+      },
+    },
+    light: {
+      palette: {
+        mode: 'light',
+        primary: {
+          main: '#7C3AED',
+          light: '#A855F7',
+          dark: '#6D28D9',
+          contrastText: '#FFFFFF',
+        },
+        secondary: {
+          main: '#A855F7',
+          light: '#C084FC',
+          dark: '#7C3AED',
+          contrastText: '#FFFFFF',
+        },
+        background: {
+          default: '#FFFFFF',
+          paper: '#F9FAFB',
+        },
+        text: {
+          primary: '#1A1A1A',
+          secondary: '#6B7280',
+        },
+        divider: '#E5E7EB',
+        error: { main: '#EF4444' },
+        warning: { main: '#F59E0B' },
+        success: { main: '#10B981' },
+        info: { main: '#3B82F6' },
       },
     },
   },
@@ -98,7 +101,9 @@ const theme = createTheme({
           borderColor: theme.palette.primary.main,
           color: theme.palette.primary.main,
           '&:hover': {
-            backgroundColor: `${theme.palette.primary.main}15`,
+            backgroundColor: theme.palette.mode === 'dark'
+              ? 'rgba(124, 58, 237, 0.15)'
+              : 'rgba(124, 58, 237, 0.08)',
             borderColor: theme.palette.primary.main,
           },
         }),
@@ -122,20 +127,12 @@ const theme = createTheme({
         }),
       },
     },
-    MuiChip: {
-      styleOverrides: {
-        root: {
-          borderRadius: 8,
-          fontWeight: 600,
-        },
-      },
-    },
     MuiTextField: {
       defaultProps: { variant: 'outlined' },
       styleOverrides: {
         root: ({ theme }) => ({
           '& .MuiOutlinedInput-root': {
-            backgroundColor: theme.palette.mode === 'light' ? grey[50] : grey[900],
+            backgroundColor: theme.palette.mode === 'dark' ? '#1A1A2E' : '#F9FAFB',
             borderRadius: 12,
             '& fieldset': { borderColor: theme.palette.divider },
             '&:hover fieldset': {
@@ -156,7 +153,7 @@ const theme = createTheme({
     MuiOutlinedInput: {
       styleOverrides: {
         root: ({ theme }) => ({
-          backgroundColor: theme.palette.mode === 'light' ? grey[50] : grey[900],
+          backgroundColor: theme.palette.mode === 'dark' ? '#1A1A2E' : '#F9FAFB',
           color: theme.palette.text.primary,
           '& fieldset': { borderColor: theme.palette.divider },
           '&:hover fieldset': {
@@ -221,7 +218,7 @@ const theme = createTheme({
     MuiSelect: {
       styleOverrides: {
         root: ({ theme }) => ({
-          backgroundColor: theme.palette.mode === 'light' ? grey[50] : grey[900],
+          backgroundColor: theme.palette.mode === 'dark' ? '#1A1A2E' : '#F9FAFB',
           borderRadius: 12,
           color: theme.palette.text.primary,
           '& .MuiOutlinedInput-notchedOutline': {
@@ -272,16 +269,6 @@ const theme = createTheme({
         }),
       },
     },
-    MuiSnackbar: {
-      styleOverrides: {
-        root: {
-          '& .MuiAlert-root': {
-            backgroundColor: purple[700],
-            color: '#FFFFFF',
-          },
-        },
-      },
-    },
     MuiAvatar: {
       styleOverrides: {
         root: ({ theme }) => ({
@@ -309,6 +296,26 @@ const theme = createTheme({
           },
           '& .MuiSlider-thumb': {
             backgroundColor: theme.palette.primary.main,
+          },
+        }),
+      },
+    },
+    MuiChip: {
+      styleOverrides: {
+        root: ({ theme }) => ({
+          backgroundColor: theme.palette.mode === 'dark' ? '#1A1A2E' : '#F3F4F6',
+          color: theme.palette.text.primary,
+          borderColor: theme.palette.divider,
+        }),
+      },
+    },
+    MuiIconButton: {
+      styleOverrides: {
+        root: ({ theme }) => ({
+          '&:hover': {
+            backgroundColor: theme.palette.mode === 'dark'
+              ? 'rgba(124, 58, 237, 0.1)'
+              : 'rgba(124, 58, 237, 0.08)',
           },
         }),
       },

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useTheme } from '@mui/material/styles'
 import IconButton from '@mui/material/IconButton'
 import Avatar from '@mui/material/Avatar'
 import InputAdornment from '@mui/material/InputAdornment'
@@ -30,6 +31,7 @@ const categories = [
 
 export default function HomePage() {
   const navigate = useNavigate()
+  const theme = useTheme()
   const { profile } = useAuth()
   const [searchValue, setSearchValue] = useState('')
   const [listings, setListings] = useState<Listing[]>([])
@@ -70,20 +72,20 @@ export default function HomePage() {
       <div className="flex items-center justify-between px-4 pt-5 pb-3">
         <div>
           <div className="flex items-center gap-1">
-            <span className="text-[#00E5FF] font-black text-2xl tracking-tight">LEVEL</span>
-            <span className="text-[10px] text-[#7A8BA8] font-medium bg-[#111D35] px-1.5 py-0.5 rounded-md border border-[#1E2D47] ml-1">AUTOMOTIVES</span>
+            <span style={{ color: theme.palette.primary.main }} className="font-black text-2xl tracking-tight">LEVEL</span>
+            <span style={{ color: theme.palette.text.secondary, backgroundColor: theme.palette.background.paper, borderColor: theme.palette.divider }} className="text-[10px] font-medium px-1.5 py-0.5 rounded-md border ml-1">AUTOMOTIVES</span>
           </div>
           <div className="flex items-center gap-1 mt-0.5">
-            <LocationOnIcon style={{ fontSize: 13, color: '#FF6B35' }} />
-            <span className="text-[#7A8BA8] text-xs">Kasaragod, Kerala</span>
+            <LocationOnIcon style={{ fontSize: 13, color: theme.palette.warning.main }} />
+            <span style={{ color: theme.palette.text.secondary }} className="text-xs">Kasaragod, Kerala</span>
           </div>
         </div>
         <div className="flex items-center gap-2">
-          <IconButton size="small" sx={{ color: '#7A8BA8', bgcolor: '#111D35', border: '1px solid #1E2D47', borderRadius: '12px' }}>
+          <IconButton size="small" sx={{ color: theme.palette.text.secondary, bgcolor: theme.palette.background.paper, border: `1px solid ${theme.palette.divider}`, borderRadius: '12px' }}>
             <NotificationsNoneIcon fontSize="small" />
           </IconButton>
           <Avatar
-            sx={{ width: 36, height: 36, bgcolor: '#00E5FF22', color: '#00E5FF', fontSize: 14, fontWeight: 700, border: '2px solid #1E2D47', cursor: 'pointer' }}
+            sx={{ width: 36, height: 36, bgcolor: theme.palette.primary.light + '33', color: theme.palette.primary.main, fontSize: 14, fontWeight: 700, border: `2px solid ${theme.palette.divider}`, cursor: 'pointer' }}
             onClick={() => navigate('/profile')}
           >
             {profile?.display_name ? profile.display_name.split(' ').map(n => n[0]).join('').slice(0, 2) : 'U'}
@@ -101,18 +103,18 @@ export default function HomePage() {
           onKeyDown={e => e.key === 'Enter' && handleSearch()}
           startAdornment={
             <InputAdornment position="start">
-              <SearchIcon sx={{ color: '#7A8BA8', fontSize: 20 }} />
+              <SearchIcon sx={{ color: theme.palette.text.secondary, fontSize: 20 }} />
             </InputAdornment>
           }
           sx={{
-            backgroundColor: '#111D35',
+            backgroundColor: theme.palette.background.paper,
             borderRadius: '14px',
             fontSize: 14,
-            '& .MuiOutlinedInput-notchedOutline': { borderColor: '#1E2D47' },
-            '&:hover .MuiOutlinedInput-notchedOutline': { borderColor: '#00E5FF33' },
-            '&.Mui-focused .MuiOutlinedInput-notchedOutline': { borderColor: '#00E5FF' },
-            '& input': { color: '#E8EDF5', py: 1.5 },
-            '& input::placeholder': { color: '#7A8BA8' },
+            '& .MuiOutlinedInput-notchedOutline': { borderColor: theme.palette.divider },
+            '&:hover .MuiOutlinedInput-notchedOutline': { borderColor: theme.palette.primary.main + '50' },
+            '&.Mui-focused .MuiOutlinedInput-notchedOutline': { borderColor: theme.palette.primary.main },
+            '& input': { color: theme.palette.text.primary, py: 1.5 },
+            '& input::placeholder': { color: theme.palette.text.secondary },
           }}
           onClick={() => navigate('/search')}
         />
@@ -122,24 +124,27 @@ export default function HomePage() {
       <div className="px-4 mb-5">
         <div
           className="rounded-2xl p-4 cursor-pointer active:scale-[0.98] transition-transform relative overflow-hidden"
-          style={{ background: 'linear-gradient(135deg, #0D2140 0%, #0A2D3D 50%, #051A2E 100%)', border: '1px solid #00E5FF22' }}
+          style={{
+            background: `linear-gradient(135deg, ${theme.palette.background.paper} 0%, ${theme.palette.background.paper} 50%, ${theme.palette.primary.dark}22 100%)`,
+            border: `1px solid ${theme.palette.primary.main}33`
+          }}
           onClick={() => navigate('/insurance?tab=value')}
         >
-          <div className="absolute top-0 right-0 w-32 h-32 rounded-full opacity-5" style={{ background: '#00E5FF', transform: 'translate(30%, -30%)' }} />
+          <div className="absolute top-0 right-0 w-32 h-32 rounded-full opacity-5" style={{ background: theme.palette.primary.main, transform: 'translate(30%, -30%)' }} />
           <div className="flex items-center justify-between relative z-10">
             <div>
               <div className="flex items-center gap-2 mb-1">
-                <div className="w-6 h-6 rounded-full bg-[#00E5FF] flex items-center justify-center">
-                  <ElectricBoltIcon style={{ fontSize: 14, color: '#050A14' }} />
+                <div className="w-6 h-6 rounded-full flex items-center justify-center" style={{ backgroundColor: theme.palette.primary.main }}>
+                  <ElectricBoltIcon style={{ fontSize: 14, color: theme.palette.primary.contrastText }} />
                 </div>
-                <span className="text-[#00E5FF] font-black text-sm tracking-wider">PRICE DECIDER</span>
+                <span style={{ color: theme.palette.primary.main }} className="font-black text-sm tracking-wider">PRICE DECIDER</span>
               </div>
-              <p className="text-[#E8EDF5] text-sm font-medium">Is the price fair?</p>
-              <p className="text-[#7A8BA8] text-xs">Check real market value instantly</p>
+              <p style={{ color: theme.palette.text.primary }} className="text-sm font-medium">Is the price fair?</p>
+              <p style={{ color: theme.palette.text.secondary }} className="text-xs">Check real market value instantly</p>
             </div>
-            <div className="flex items-center gap-1 bg-[#00E5FF] rounded-xl px-3 py-2">
-              <span className="text-[#050A14] text-xs font-black">Check now</span>
-              <ArrowForwardIcon style={{ fontSize: 14, color: '#050A14' }} />
+            <div className="flex items-center gap-1 rounded-xl px-3 py-2" style={{ backgroundColor: theme.palette.primary.main }}>
+              <span style={{ color: theme.palette.primary.contrastText }} className="text-xs font-black">Check now</span>
+              <ArrowForwardIcon style={{ fontSize: 14, color: theme.palette.primary.contrastText }} />
             </div>
           </div>
         </div>

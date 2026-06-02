@@ -86,8 +86,8 @@ function AppContent() {
 export default function App() {
   return (
     <BrowserRouter>
-      <InitColorSchemeScript defaultMode="system" />
-      <ThemeProvider theme={theme}>
+      <InitColorSchemeScript defaultMode="dark" />
+      <ThemeProvider theme={theme} defaultMode="dark">
         <CssBaseline />
         <ToastProvider>
           <AuthProvider>

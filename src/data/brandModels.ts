@@ -1,0 +1,43 @@
+export const brandModels: Record<string, string[]> = {
+  "Maruti Suzuki": ["800","Alto","Alto K10","S-Presso","Celerio","WagonR","Swift","Baleno","Ignis","Dzire","Ciaz","Ertiga","XL6","Brezza","Grand Vitara","Jimny","Fronx","Eeco","Omni","Zen","Esteem","Gypsy","SX4","Other"],
+  "Hyundai": ["Santro","i10","Grand i10","i10 Nios","i20","i20 N Line","Verna","Aura","Exter","Venue","Creta","Alcazar","Tucson","Ioniq 5","Kona Electric","Xcent","Elite i20","Other"],
+  "Honda": ["Brio","Amaze","City","City Hybrid","Civic","Jazz","WR-V","HR-V","Elevate","CR-V","Accord","Other"],
+  "Tata": ["Nano","Tiago","Tigor","Altroz","Punch","Nexon","Nexon EV","Harrier","Safari","Sierra","Hexa","Bolt","Zest","Indica","Indigo","Sumo","Xenon","Other"],
+  "Mahindra": ["Thar","Thar Roxx","Scorpio","Scorpio N","Scorpio Classic","XUV300","XUV400","XUV700","Bolero","Bolero Neo","KUV100","Marazzo","TUV300","Xylo","Verito","BE6","XEV9e","Other"],
+  "Toyota": ["Glanza","Urban Cruiser","Hyryder","Innova Crysta","Innova HyCross","Fortuner","Hilux","Camry","Yaris","Corolla","Etios","Etios Liva","Prius","Land Cruiser","Vellfire","Other"],
+  "Kia": ["Seltos","Sonet","Carnival","Carens","EV6","EV9","Other"],
+  "MG": ["Hector","Hector Plus","Gloster","Astor","ZS EV","Comet EV","Windsor EV","Other"],
+  "Renault": ["Kwid","Triber","Kiger","Duster","Captur","Lodgy","Other"],
+  "Volkswagen": ["Polo","Vento","Taigun","Virtus","Tiguan","T-Roc","Other"],
+  "Skoda": ["Fabia","Rapid","Slavia","Kushaq","Octavia","Superb","Kodiaq","Other"],
+  "BMW": ["1 Series","2 Series","3 Series","5 Series","7 Series","X1","X3","X5","X7","M3","M5","iX","i4","i7","Other"],
+  "Mercedes-Benz": ["A-Class","C-Class","E-Class","S-Class","GLA","GLB","GLC","GLE","GLS","AMG GT","EQS","EQB","EQE","Other"],
+  "Audi": ["A3","A4","A6","A8","Q2","Q3","Q5","Q7","Q8","e-tron","RS3","RS5","TT","Other"],
+  "Royal Enfield": ["Bullet 350","Classic 350","Meteor 350","Hunter 350","Himalayan","Scram 411","Super Meteor 650","Continental GT 650","Interceptor 650","Shotgun 650","Other"],
+  "Hero": ["HF Deluxe","Splendor+","Splendor Xtec","Passion Pro","Glamour","Destini 125","Maestro Edge","Pleasure+","Xoom","Xtreme 125R","Xtreme 160R","Xtreme 200S","Xpulse 200","Xpulse 400","Karizma XMR","Other"],
+  "Bajaj": ["CT100","Platina","Discover 110","Discover 125","Pulsar 125","Pulsar 150","Pulsar 160NS","Pulsar 180","Pulsar 200NS","Pulsar 220F","Pulsar RS200","Pulsar N160","Pulsar N250","Dominar 250","Dominar 400","Avenger Street 160","Avenger Cruise 220","Chetak EV","Other"],
+  "TVS": ["Sport","Star City+","Radeon","Jupiter","Jupiter 125","Ntorq 125","iQube","iQube S","Ronin","Apache RTR 160","Apache RTR 165RP","Apache RTR 200 4V","Apache RR 310","Raider 125","XL Super","Other"],
+  "Yamaha": ["RX100","RX135","FZ-S","FZ-FI","FZS-FI","FZ25","MT-15","R15 V4","R15S","R3","MT-03","FZ-X","Ray ZR","Ray ZR Street Rally","Fascino 125","Aerox 155","Other"],
+  "Suzuki": ["Access 125","Burgman Street","Avenis 125","Gixxer 150","Gixxer SF 150","Gixxer 250","Gixxer SF 250","V-Strom SX","Other"],
+  "KTM": ["Duke 125","Duke 200","Duke 250","Duke 390","RC 125","RC 200","RC 390","Adventure 250","Adventure 390","Adventure 890","Other"],
+  "Ashok Leyland": ["Dost","Dost+","Partner","Bada Dost","Boss","Captain","Ecomet","Viking Bus","Lynx Bus","Other"],
+  "Tata Commercial": ["Ace","Ace EV","Super Ace","Yodha Pickup","Ultra T.7","LPT 407","LPT 1109","Signa 1918","Prima","Other"],
+  "Eicher": ["Pro 1049","Pro 1059","Pro 2049","Pro 3015","Pro 5016","Pro 6016","Pro 6028","Pro 8035","Other"],
+  "Force": ["Traveller 3350","Traveller 4020","Urbania","Gurkha","Trax Toofan","Citiline","Other"],
+  "Other Brand": ["Other - Enter Manually"],
+}
+
+export const allBrands = Object.keys(brandModels)
+
+export const vehicleColors = [
+  { name: 'White',  hex: '#F5F5F5' },
+  { name: 'Silver', hex: '#C0C0C0' },
+  { name: 'Black',  hex: '#1a1a1a' },
+  { name: 'Red',    hex: '#ef4444' },
+  { name: 'Blue',   hex: '#3b82f6' },
+  { name: 'Brown',  hex: '#92400e' },
+  { name: 'Grey',   hex: '#6b7280' },
+  { name: 'Green',  hex: '#22c55e' },
+  { name: 'Yellow', hex: '#eab308' },
+  { name: 'Orange', hex: '#f97316' },
+]

@@ -7,7 +7,6 @@ import { useEffect, useState } from 'react'
 import { supabase } from '../lib/supabase'
 import { useAuth } from '../lib/auth-context'
 import { useToast } from '../lib/toast-context'
-import DealBadge from './DealBadge'
 import VerifiedBadge from './VerifiedBadge'
 
 interface Props {
@@ -24,7 +23,6 @@ export default function ListingCard({ listing, compact = false }: Props) {
 
   useEffect(() => {
     if (!user) return
-
     const checkIfSaved = async () => {
       try {
         const { data } = await supabase
@@ -33,38 +31,25 @@ export default function ListingCard({ listing, compact = false }: Props) {
           .eq('user_id', user.id)
           .eq('listing_id', listing.id)
           .maybeSingle()
-
         setSaved(!!data)
       } catch (err) {
         console.error('Error checking saved status:', err)
       }
     }
-
     checkIfSaved()
   }, [user, listing.id])
 
   const handleSave = async (e: React.MouseEvent) => {
     e.stopPropagation()
-
-    if (!user) {
-      navigate('/login')
-      return
-    }
-
+    if (!user) { navigate('/login'); return }
     setLoading(true)
     try {
       if (saved) {
-        await supabase
-          .from('saved_listings')
-          .delete()
-          .eq('user_id', user.id)
-          .eq('listing_id', listing.id)
+        await supabase.from('saved_listings').delete().eq('user_id', user.id).eq('listing_id', listing.id)
         setSaved(false)
         success('Removed from saved')
       } else {
-        await supabase
-          .from('saved_listings')
-          .insert({ user_id: user.id, listing_id: listing.id })
+        await supabase.from('saved_listings').insert({ user_id: user.id, listing_id: listing.id })
         setSaved(true)
         success('Added to saved')
       }
@@ -85,16 +70,16 @@ export default function ListingCard({ listing, compact = false }: Props) {
 
   return (
     <div
-      className="bg-[#0D1526] border border-[#1E2D47] rounded-2xl overflow-hidden active:scale-[0.98] transition-transform cursor-pointer"
+      className="bg-[#1A1A2E] border border-[#374151] rounded-2xl overflow-hidden active:scale-[0.98] transition-transform cursor-pointer"
       onClick={() => navigate(`/listing/${listing.id}`)}
     >
       <div className="flex gap-3 p-3">
-        {/* Image placeholder */}
-        <div className="w-24 h-20 rounded-xl bg-[#111D35] flex items-center justify-center shrink-0 relative overflow-hidden">
+        {/* Image */}
+        <div className="w-24 h-20 rounded-xl bg-[#0D0D1A] flex items-center justify-center shrink-0 relative overflow-hidden">
           <span className="text-4xl">{listing.emoji}</span>
           {listing.status === 'pending' && (
-            <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
-              <span className="text-[8px] text-amber-400 font-bold text-center px-1">PENDING</span>
+            <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
+              <span className="text-[8px] text-amber-400 font-bold text-center px-1">PENDING VERIFICATION</span>
             </div>
           )}
         </div>
@@ -102,43 +87,45 @@ export default function ListingCard({ listing, compact = false }: Props) {
         {/* Details */}
         <div className="flex-1 min-w-0">
           <div className="flex items-start justify-between gap-1">
-            <h3 className={`text-[#E8EDF5] font-semibold leading-tight ${compact ? 'text-sm' : 'text-sm'} line-clamp-2`}>
+            <h3 className={`text-white font-semibold leading-tight text-sm line-clamp-2`}>
               {listing.title}
             </h3>
             <IconButton
               size="small"
               onClick={handleSave}
               disabled={loading}
-              sx={{ color: saved ? '#00E5FF' : '#7A8BA8', p: 0.5, mt: -0.5 }}
+              sx={{ color: saved ? '#7C3AED' : '#6B7280', p: 0.5, mt: -0.5 }}
             >
               {saved ? <BookmarkIcon fontSize="small" /> : <BookmarkBorderIcon fontSize="small" />}
             </IconButton>
           </div>
 
-          <div className="text-[#00E5FF] font-bold text-lg leading-tight mt-0.5">
+          <div className="text-[#7C3AED] font-bold text-lg leading-tight mt-0.5">
             {formatPrice(listing.price)}
             {listing.negotiable && (
-              <span className="text-[#7A8BA8] text-[10px] font-normal ml-1">Negotiable</span>
+              <span className="text-[#6B7280] text-[10px] font-normal ml-1">Negotiable</span>
             )}
           </div>
 
-          <div className="text-[#7A8BA8] text-[11px] mt-1 flex items-center gap-1.5 flex-wrap">
+          <div className="text-[#6B7280] text-[11px] mt-1 flex items-center gap-1.5 flex-wrap">
             <span>{listing.year}</span>
-            <span className="text-[#1E2D47]">·</span>
+            <span className="text-[#374151]">·</span>
             <span>{formatKm(listing.km)}</span>
-            <span className="text-[#1E2D47]">·</span>
+            <span className="text-[#374151]">·</span>
             <span>{listing.fuelType}</span>
           </div>
 
           <div className="flex items-center gap-1.5 mt-1.5 flex-wrap">
-            <span className="flex items-center gap-0.5 text-[#7A8BA8] text-[11px]">
+            <span className="flex items-center gap-0.5 text-[#6B7280] text-[11px]">
               <LocationOnIcon style={{ fontSize: 11 }} />
               {listing.location}
             </span>
-            {listing.dealScore && <DealBadge score={listing.dealScore} />}
-            {listing.deal_status && <DealBadge status={listing.deal_status} />}
-            {listing.verified && <VerifiedBadge />}
-            {listing.status && <VerifiedBadge status={listing.status} />}
+            {(listing.verified || listing.status === 'verified') && <VerifiedBadge />}
+            {(listing.status === 'pending' || listing.status === 'Pending') && (
+              <span className="text-[9px] font-bold px-1.5 py-0.5 rounded-md bg-amber-500/20 text-amber-400 border border-amber-500/30">
+                ⏳ Pending
+              </span>
+            )}
           </div>
         </div>
       </div>

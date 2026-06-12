@@ -14,7 +14,7 @@ interface Props {
   compact?: boolean
 }
 
-export default function ListingCard({ listing, compact = false }: Props) {
+export default function ListingCard({ listing, compact: _compact = false }: Props) {
   const navigate = useNavigate()
   const { user } = useAuth()
   const { success, error } = useToast()

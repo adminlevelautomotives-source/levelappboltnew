@@ -1,4 +1,3 @@
-export type DealScore = 'GREAT DEAL' | 'FAIR' | 'OVERPRICED'
 export type VerificationStatus = 'verified' | 'pending'
 export type FuelType = 'Petrol' | 'Diesel' | 'Electric' | 'CNG' | 'LPG'
 export type Category = 'Cars' | '2-3 Wheelers' | 'Heavy Vehicles' | 'Spare Parts' | 'Services'
@@ -12,7 +11,6 @@ export interface Listing {
   fuelType: FuelType
   location: string
   district: string
-  dealScore: DealScore
   status: VerificationStatus
   category: Category
   brand: string
@@ -41,7 +39,6 @@ export const mockListings: Listing[] = [
     fuelType: 'Petrol',
     location: 'Kasaragod',
     district: 'Kasaragod',
-    dealScore: 'GREAT DEAL',
     status: 'verified',
     category: 'Cars',
     brand: 'Maruti Suzuki',
@@ -68,7 +65,6 @@ export const mockListings: Listing[] = [
     fuelType: 'Petrol',
     location: 'Kanhangad',
     district: 'Kasaragod',
-    dealScore: 'FAIR',
     status: 'verified',
     category: '2-3 Wheelers',
     brand: 'Honda',
@@ -95,7 +91,6 @@ export const mockListings: Listing[] = [
     fuelType: 'Diesel',
     location: 'Kasaragod',
     district: 'Kasaragod',
-    dealScore: 'OVERPRICED',
     status: 'pending',
     category: 'Cars',
     brand: 'Toyota',
@@ -122,7 +117,6 @@ export const mockListings: Listing[] = [
     fuelType: 'Petrol',
     location: 'Bekal',
     district: 'Kasaragod',
-    dealScore: 'GREAT DEAL',
     status: 'verified',
     category: '2-3 Wheelers',
     brand: 'Royal Enfield',
@@ -149,7 +143,6 @@ export const mockListings: Listing[] = [
     fuelType: 'Diesel',
     location: 'Kasaragod',
     district: 'Kasaragod',
-    dealScore: 'FAIR',
     status: 'verified',
     category: 'Cars',
     brand: 'Hyundai',
@@ -176,7 +169,6 @@ export const mockListings: Listing[] = [
     fuelType: 'Electric',
     location: 'Kanhangad',
     district: 'Kasaragod',
-    dealScore: 'GREAT DEAL',
     status: 'pending',
     category: 'Cars',
     brand: 'Tata',

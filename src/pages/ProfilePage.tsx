@@ -14,7 +14,6 @@ import Typography from '@mui/material/Typography'
 import Container from '@mui/material/Container'
 import { useAuth } from '../lib/auth-context'
 import { supabase, type Listing } from '../lib/supabase'
-import DealBadge from '../components/DealBadge'
 import VerifiedBadge from '../components/VerifiedBadge'
 import LoadingSpinner from '../components/LoadingSpinner'
 
@@ -222,7 +221,6 @@ export default function ProfilePage() {
                       <h3 className="text-white font-bold">{listing.title}</h3>
                       <p className="text-[#00E5FF] font-bold text-sm">{formatPrice(listing.price || 0)}</p>
                       <div className="flex gap-2 mt-2">
-                        {listing.deal_status && <DealBadge status={listing.deal_status as 'GREAT_DEAL' | 'FAIR' | 'OVERPRICED'} />}
                         {listing.verified && <VerifiedBadge />}
                       </div>
                     </div>

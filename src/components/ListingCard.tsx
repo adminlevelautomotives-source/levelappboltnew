@@ -7,7 +7,6 @@ import { useEffect, useState } from 'react'
 import { supabase } from '../lib/supabase'
 import { useAuth } from '../lib/auth-context'
 import { useToast } from '../lib/toast-context'
-import DealBadge from './DealBadge'
 import VerifiedBadge from './VerifiedBadge'
 
 interface Props {
@@ -135,8 +134,6 @@ export default function ListingCard({ listing, compact = false }: Props) {
               <LocationOnIcon style={{ fontSize: 11 }} />
               {listing.location}
             </span>
-            {listing.dealScore && <DealBadge score={listing.dealScore} />}
-            {listing.deal_status && <DealBadge status={listing.deal_status} />}
             {listing.verified && <VerifiedBadge />}
             {listing.status && <VerifiedBadge status={listing.status} />}
           </div>

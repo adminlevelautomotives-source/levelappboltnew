@@ -24,7 +24,6 @@ import { supabase, type Listing, type Rating as RatingType } from '../lib/supaba
 import { useAuth } from '../lib/auth-context'
 import { useToast } from '../lib/toast-context'
 import EmptyState from '../components/EmptyState'
-import DealBadge from '../components/DealBadge'
 import VerifiedBadge from '../components/VerifiedBadge'
 
 export default function ListingDetailPage() {
@@ -248,7 +247,6 @@ export default function ListingDetailPage() {
         <h1 style={{ fontSize: '24px', fontWeight: 700, margin: '0 0 8px 0' }}>{listing.title}</h1>
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '16px' }}>
           <div style={{ fontSize: '28px', fontWeight: 800, color: '#00E5FF' }}>{formatPrice(listing.price || 0)}</div>
-          {listing.deal_status && <DealBadge status={listing.deal_status as any} />}
           {listing.verified && <VerifiedBadge />}
         </div>
 

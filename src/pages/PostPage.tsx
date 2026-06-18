@@ -18,6 +18,7 @@ import Slider from '@mui/material/Slider'
 import CheckCircleIcon from '@mui/icons-material/CheckCircle'
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate'
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined'
+import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome'
 import CheckIcon from '@mui/icons-material/Check'
 import { useAuth } from '../lib/auth-context'
 import { useToast } from '../lib/toast-context'
@@ -731,14 +732,15 @@ export default function PostPage() {
             </div>
             <Button
               fullWidth variant="outlined"
-              onClick={() => navigate('/insurance?tab=value')}
+              onClick={() => navigate('/price-decider?returnTo=/post')}
               sx={{
                 borderColor: PURPLE, color: PURPLE,
                 borderRadius: '12px', mb: 4, fontWeight: 700,
                 '&:hover': { bgcolor: PURPLE_BG },
               }}
             >
-              ⚡ Use Price Decider
+              <AutoAwesomeIcon sx={{ mr: 1, fontSize: 18 }} />
+              Use AI Price Decider
             </Button>
             <div className="bg-[#0D1526] border border-[#1E2D47] rounded-xl p-4">
               <FormControlLabel

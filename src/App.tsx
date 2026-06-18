@@ -25,6 +25,7 @@ import InsurancePage from './pages/InsurancePage'
 import LoginPage from './pages/LoginPage'
 import SignupPage from './pages/SignupPage'
 import SavedListingsPage from './pages/SavedListingsPage'
+import PriceDeciderPage from './pages/PriceDeciderPage'
 import Box from '@mui/material/Box'
 import CircularProgress from '@mui/material/CircularProgress'
 
@@ -77,6 +78,7 @@ function AppContent() {
         <Route path="/garages" element={<GaragesPage />} />
         <Route path="/garages/:id" element={<GarageDetailPage />} />
         <Route path="/insurance" element={<InsurancePage />} />
+        <Route path="/price-decider" element={<PriceDeciderPage />} />
       </Routes>
       <BottomNav />
     </div>

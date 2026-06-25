@@ -56,47 +56,79 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   }
 
-  const signUp = async (email: string, password: string, displayName: string, phone: string) => {
+  const signUp = async (phone: string, displayName: string) => {
     try {
-      const { data: { user: newUser }, error } = await supabase.auth.signUp({
-        email,
-        password,
+      const formattedPhone = `+91${phone}`
+
+      const { error } = await supabase.auth.signInWithOtp({
+        phone: formattedPhone,
+        options: {
+          data: {
+            display_name: displayName,
+          },
+        },
       })
 
       if (error) throw error
-      if (!newUser) throw new Error('User creation failed')
-
-      // Create user profile
-      const { error: profileError } = await supabase.from('user_profiles').insert({
-        id: newUser.id,
-        display_name: displayName,
-        phone,
-        seller_type: 'individual',
-      })
-
-      if (profileError) throw profileError
-      setUser(newUser)
-      await fetchProfile(newUser.id)
     } catch (error) {
       console.error('Sign up error:', error)
       throw error
     }
   }
 
-  const signIn = async (email: string, password: string) => {
+  const signIn = async (phone: string) => {
     try {
-      const { data: { user: signedInUser }, error } = await supabase.auth.signInWithPassword({
-        email,
-        password,
+      const formattedPhone = `+91${phone}`
+
+      const { error } = await supabase.auth.signInWithOtp({
+        phone: formattedPhone,
       })
 
       if (error) throw error
-      if (signedInUser) {
-        setUser(signedInUser)
-        await fetchProfile(signedInUser.id)
-      }
     } catch (error) {
       console.error('Sign in error:', error)
+      throw error
+    }
+  }
+
+  const verifyOtp = async (phone: string, token: string) => {
+    try {
+      const formattedPhone = `+91${phone}`
+
+      const { data, error } = await supabase.auth.verifyOtp({
+        phone: formattedPhone,
+        token,
+        type: 'sms',
+      })
+
+      if (error) throw error
+
+      if (data.user) {
+        setUser(data.user)
+
+        // Check if profile exists, create if not
+        const { data: existingProfile } = await supabase
+          .from('user_profiles')
+          .select('id')
+          .eq('id', data.user.id)
+          .maybeSingle()
+
+        if (!existingProfile) {
+          const displayName = data.user.user_metadata?.display_name || 'User'
+          const phoneFromUser = data.user.phone || formattedPhone
+
+          await supabase.from('user_profiles').insert({
+            id: data.user.id,
+            display_name: displayName,
+            phone: phoneFromUser.replace('+91', ''),
+            seller_type: 'individual',
+          })
+        }
+
+        await fetchProfile(data.user.id)
+      }
+    } catch (error) {
+      console.error('OTP verify error:', error)
       throw error
     }
   }
@@ -120,6 +152,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     isAuthenticated: !!user,
     signUp,
     signIn,
+    verifyOtp,
     signOut,
   }
 

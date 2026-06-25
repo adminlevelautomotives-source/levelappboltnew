@@ -71,7 +71,8 @@ export type AuthContextType = {
   profile: UserProfile | null
   isLoading: boolean
   isAuthenticated: boolean
-  signUp: (email: string, password: string, displayName: string, phone: string) => Promise<void>
-  signIn: (email: string, password: string) => Promise<void>
+  signUp: (phone: string, displayName: string) => Promise<void>
+  signIn: (phone: string) => Promise<void>
+  verifyOtp: (phone: string, token: string) => Promise<void>
   signOut: () => Promise<void>
 }
